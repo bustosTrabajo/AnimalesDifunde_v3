@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "754138969988",
+    "project_id": "animalesdifunde-v3",
+    "storage_bucket": "animalesdifunde-v3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754138969988:android:8c1adaf8bafc39950c0fd1",
+        "android_client_info": {
+          "package_name": "com.davidbustos.animalesdifunde_v3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754138969988-6g9ck322tl468d343pigr7rhtej54e7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSy3uxc-cDX3SsRsloaMToDHqy5FLl4JE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754138969988-6g9ck322tl468d343pigr7rhtej54e7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

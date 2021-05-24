@@ -1,0 +1,2 @@
+rootProject.name = "AnimalesDifunde_v3"
+include ':app'
