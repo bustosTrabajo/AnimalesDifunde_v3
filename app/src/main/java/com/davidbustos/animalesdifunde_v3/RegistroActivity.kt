@@ -92,6 +92,7 @@ class RegistroActivity : AppCompatActivity() {
         intentGaleria.type="image/*"
         startActivityForResult(intentGaleria,REQUEST_GALLERY)
     }
+
     private fun subirImagenBD(){
         if(FileUri!=null){
             var pd= ProgressDialog(this)

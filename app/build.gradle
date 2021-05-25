@@ -2,9 +2,10 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'com.google.gms.google-services'
 
 }
-apply plugin: 'com.google.gms.google-services'
+
 
 android {
     compileSdkVersion 30
@@ -51,6 +52,7 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-firestore-ktx:22.1.2'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    //Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
@@ -59,11 +61,9 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:7.1.1'
     implementation 'com.firebaseui:firebase-ui-storage:7.1.1'
     implementation 'com.google.firebase:firebase-database'
+
     //Google Maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
-
-    // Extensiones de Android Studio
-    apply plugin: 'kotlin-android-extensions'
 
     //Glide 4.12
     implementation 'com.github.bumptech.glide:glide:4.12.0'
