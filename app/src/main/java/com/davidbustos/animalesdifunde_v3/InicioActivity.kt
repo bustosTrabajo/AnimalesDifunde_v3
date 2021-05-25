@@ -3,18 +3,14 @@ package com.davidbustos.animalesdifunde_v3
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_inicio.*
-import kotlinx.android.synthetic.main.activity_registro.*
 
 class InicioActivity : AppCompatActivity() {
 
@@ -35,12 +31,21 @@ class InicioActivity : AppCompatActivity() {
             registro()
         }
         btnSalirAplicacion.setOnClickListener(){
-
+            cerrarAplicacion()
         }
 
+
     }
+    override fun onBackPressed(){
 
-
+    }
+    private fun cerrarAplicacion(){
+        finish()
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
     private fun login(){
         if(etEmail.text.isNotEmpty() && etContrasena.text.isNotEmpty()) {
             FirebaseAuth.getInstance()

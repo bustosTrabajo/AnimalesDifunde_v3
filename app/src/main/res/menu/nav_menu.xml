@@ -16,6 +16,11 @@
         android:title="Mensajes"
         android:icon="@drawable/ic_mensajes"
         />
+    <item
+        android:id="@+id/item4"
+        android:title="Cerrar Sesión"
+        android:icon="@drawable/ic_cerrar_sesion"
+        />
 
 
 </menu>

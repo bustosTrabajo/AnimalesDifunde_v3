@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.davidbustos.animalesdifundekotlin.AnimalesAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -48,6 +49,7 @@ class AnimalesDifundeActivity : AppCompatActivity() {
                 R.id.item1 -> miPerfil()
                 R.id.item2 -> misAnimales()
                 R.id.item3 -> misMensajes()
+                R.id.item4 -> cerrarSesion()
 
             }
             true
@@ -66,6 +68,9 @@ class AnimalesDifundeActivity : AppCompatActivity() {
 
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = animalesAdapter
+
+    }
+    override fun onBackPressed(){
 
     }
 
@@ -93,6 +98,12 @@ class AnimalesDifundeActivity : AppCompatActivity() {
     }
     private fun misMensajes(){
         var intent= Intent(this, MisMensajesActivity::class.java)
+        startActivity(intent)
+    }
+    private fun cerrarSesion(){
+        FirebaseAuth.getInstance().signOut()
+        finish()
+        var intent= Intent(this, InicioActivity::class.java)
         startActivity(intent)
     }
 
