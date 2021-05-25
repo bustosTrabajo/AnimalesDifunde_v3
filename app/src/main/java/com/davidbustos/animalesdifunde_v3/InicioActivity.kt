@@ -49,9 +49,8 @@ class InicioActivity : AppCompatActivity() {
                 .addOnCompleteListener{
                     if(it.isSuccessful){
                         var intent= Intent(this,AnimalesDifundeActivity::class.java)
-
+                        guardarDatos()
                         startActivity(intent)
-
                     }else{
                         showAlert()
                     }
@@ -60,13 +59,14 @@ class InicioActivity : AppCompatActivity() {
     }
     //Guardar datos del Usuario
     private fun guardarDatos(){
-        val email=etCorreoElectronicoRegistro.text.toString()
+        val email=etEmail.text.toString()
         //val urlString=url.toString()
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val editor: SharedPreferences.Editor =sharedPreferences.edit()
 
         editor.putString("usuario",email)
         editor.apply()
+
 
     }
     private fun registro(){

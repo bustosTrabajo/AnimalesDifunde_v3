@@ -41,9 +41,6 @@ class RegistroActivity : AppCompatActivity() {
     lateinit private var FileUriString:String
     lateinit private var url:Task<Uri>
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
@@ -117,9 +114,7 @@ class RegistroActivity : AppCompatActivity() {
                     pd.setMessage("Uploaded ${progress.toInt()}")
 
                 }
-
         }
-
     }
     override fun onActivityResult(requestCode:Int, resultCode:Int, data:Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -130,12 +125,10 @@ class RegistroActivity : AppCompatActivity() {
             FileUri= data?.data!!
 
         }
-
     }
     private fun registroUsuarioBD(){
         //Recoger valores de nuestros RadioGroup
         val soy:String=valoresRadioGroup()
-
         db.collection("usuarios").document(etCorreoElectronicoRegistro.text.toString())
             .set(
                 hashMapOf("nombre" to etNombreRegistro.text.toString(),
@@ -144,7 +137,6 @@ class RegistroActivity : AppCompatActivity() {
                     "telefono" to etTelefonoRegistro.text.toString(),
                     "direccion" to etDireccionRegistro.text.toString(),
                     "soy" to soy
-
                 )
             )
     }
@@ -182,10 +174,9 @@ class RegistroActivity : AppCompatActivity() {
                         showAlert()
                     }
                 }
+
         }
-
     }
-
     //Guardar datos del usuario
     private fun guardarDatos() {
         val email=etCorreoElectronicoRegistro.text.toString()
@@ -197,7 +188,6 @@ class RegistroActivity : AppCompatActivity() {
         editor.apply()
 
     }
-
     private fun showAlert(){
         val builder= AlertDialog.Builder(this)
         builder.setTitle("Error")
