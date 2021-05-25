@@ -9,12 +9,27 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.davidbustos.animalesdifundekotlin.AnimalesAdapter
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import kotlinx.android.synthetic.main.activity_animales_difunde.*
 
 class AnimalesDifundeActivity : AppCompatActivity() {
+
+    //Navigation Drawer
     lateinit var toogle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
     lateinit var navigationView: NavigationView
+    //Todos los Animales
+
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val collectionReference: CollectionReference = db.collection("animales")
+
+    var animalesAdapter: AnimalesAdapter?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,24 +47,53 @@ class AnimalesDifundeActivity : AppCompatActivity() {
                 //Inflar diferentes fragments o activities relacionados con el item de menú
                 R.id.item1 -> miPerfil()
                 R.id.item2 -> misAnimales()
-                R.id.item3 -> mensajes()
+                R.id.item3 -> misMensajes()
 
             }
             true
         }
 
+        setUpRecyclerView()
+
+    }
+    fun setUpRecyclerView(){
+        val query: Query =collectionReference;
+        val firestoreRecyclerOptions: FirestoreRecyclerOptions<Animal> = FirestoreRecyclerOptions.Builder<Animal>()
+            .setQuery(query,Animal::class.java)
+            .build();
+
+        animalesAdapter = AnimalesAdapter(firestoreRecyclerOptions);
+
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = animalesAdapter
+
+    }
+
+    override fun onStart(){
+        super.onStart()
+        animalesAdapter!!.startListening()
+
+
+    }
+    override fun onDestroy(){
+        super.onDestroy()
+        animalesAdapter!!.stopListening()
+
+
     }
 
     private fun miPerfil() {
-
+        var intent= Intent(this, MiPerfilActivity::class.java)
+        startActivity(intent)
     }
     private fun misAnimales(){
         var intent= Intent(this, MisAnimalesActivity::class.java)
         startActivity(intent)
 
     }
-    private fun mensajes(){
-        //Toast.makeText(applicationContext,"Ir a Mensajes",Toast.LENGTH_LONG).show()
+    private fun misMensajes(){
+        var intent= Intent(this, MisMensajesActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean{

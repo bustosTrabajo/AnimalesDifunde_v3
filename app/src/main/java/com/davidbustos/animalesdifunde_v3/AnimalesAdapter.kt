@@ -24,7 +24,7 @@ class AnimalesAdapter(options: FirestoreRecyclerOptions<Animal>) :
         holder.tv_nombreAnimal.text=model.nombre
         holder.tv_tipoAnimal.text=model.tipo
         holder.tv_razaAnimal.text=model.raza
-        holder.tv_usuarioAnimal.text=model.usuario_animal
+        holder.tv_usuarioAnimal.text=model.usuario
 
     }
     class AnimalesAdapterVH(itemView: View) : RecyclerView.ViewHolder(itemView) {

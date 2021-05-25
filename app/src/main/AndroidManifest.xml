@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimalesDifunde_v3">
-        <activity android:name=".SubirAnimalActivity"></activity>
+        <activity android:name=".MisMensajesActivity"></activity>
+        <activity android:name=".MiPerfilActivity" />
+        <activity android:name=".SubirAnimalActivity" />
         <activity android:name=".MisAnimalesActivity" />
         <activity android:name=".RegistroActivity" />
         <activity android:name=".AnimalesDifundeActivity" />
