@@ -65,6 +65,7 @@ class AnimalesDifundeActivity : AppCompatActivity() {
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         var usuario=sharedPreferences.getString("usuario","no usuario")
         txtNombreUsuario.text=usuario
+        Toast.makeText(applicationContext,"Datos de usuario cargados correctamente", Toast.LENGTH_LONG).show()
 
     }
     private fun recogerImagen(){
