@@ -28,61 +28,58 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="75dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/busquedaPorNombre">
 
             <ImageView
                 android:id="@+id/logoPerro"
-                android:layout_width="50dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/logoperro"
-                android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
-                />
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/logoperro" />
+
             <ImageView
                 android:id="@+id/logoGato"
-                android:layout_width="50dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/logogato"
-                android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
-                />
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/logogato" />
+
             <ImageView
                 android:id="@+id/logoReptil"
-                android:layout_width="50dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/logoreptil"
-                android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
-                />
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/logoreptil" />
+
             <ImageView
                 android:id="@+id/logoPajaro"
-                android:layout_width="50dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/logopajaro"
-                android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
-                />
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/logopajaro" />
+
             <ImageView
                 android:id="@+id/logoExotico"
-                android:layout_width="50dp"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/logoexotico"
-                android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"
-                />
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/logoexotico" />
         </LinearLayout>
 
         <TextView
