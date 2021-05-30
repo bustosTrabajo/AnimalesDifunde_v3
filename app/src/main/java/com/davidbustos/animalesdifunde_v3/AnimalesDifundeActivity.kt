@@ -3,11 +3,11 @@ package com.davidbustos.animalesdifunde_v3
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.davidbustos.animalesdifundekotlin.AnimalesAdapter
@@ -54,9 +54,41 @@ class AnimalesDifundeActivity : AppCompatActivity() {
             true
         }
 
+        logoPerro.setOnClickListener(){
+            Toast.makeText(this,"Cargar Recycler con animales de tipo Perro",Toast.LENGTH_LONG).show()
+            buscarPorCategoria("Perro")
+        }
+        logoGato.setOnClickListener(){
+            buscarPorCategoria("Gato")
+        }
+        logoReptil.setOnClickListener(){
+            buscarPorCategoria("Reptil")
+        }
+        logoExotico.setOnClickListener(){
+            buscarPorCategoria("Exótico")
+        }
+        logoPajaro.setOnClickListener(){
+            buscarPorCategoria("Pájaro")
+        }
+
+
         setUpRecyclerView()
 
     }
+    private fun buscarPorCategoria(categoria:String){
+        val query: Query =collectionReference.whereEqualTo("tipo", categoria);
+
+        val firestoreRecyclerOptions: FirestoreRecyclerOptions<Animal> = FirestoreRecyclerOptions.Builder<Animal>()
+            .setQuery(query,Animal::class.java)
+            .build();
+
+        animalesAdapter = AnimalesAdapter(firestoreRecyclerOptions);
+
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = animalesAdapter
+    }
+
+
     fun setUpRecyclerView(){
         val query: Query =collectionReference;
         val firestoreRecyclerOptions: FirestoreRecyclerOptions<Animal> = FirestoreRecyclerOptions.Builder<Animal>()
@@ -127,4 +159,6 @@ class AnimalesDifundeActivity : AppCompatActivity() {
 
 
     }
+
+
 }

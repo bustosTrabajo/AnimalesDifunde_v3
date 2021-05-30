@@ -1,5 +1,6 @@
 package com.davidbustos.animalesdifunde_v3
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
@@ -44,6 +45,11 @@ class MiPerfilActivity : AppCompatActivity() {
 
         }
 
+        btnVolver.setOnClickListener(){
+            var intent= Intent(this,InicioActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun datosMiPerfil() {
@@ -56,5 +62,8 @@ class MiPerfilActivity : AppCompatActivity() {
             etTelefono.setText(it.get("telefono") as String?)
 
         }
+    }
+    override fun onBackPressed(){
+
     }
 }

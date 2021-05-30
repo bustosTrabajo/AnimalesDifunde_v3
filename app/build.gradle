@@ -66,9 +66,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     //Google Auth
     implementation 'com.google.firebase:firebase-auth:20.0.3'
+
     //Facebook Auth
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    //implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    //implementation 'com.facebook.android:facebook-login:[8.1)'
     //implementation 'com.facebook.android:facebook-share:[5,6)'
+
     //Google Maps
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 

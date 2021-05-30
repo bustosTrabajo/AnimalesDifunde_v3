@@ -62,4 +62,7 @@ class MisAnimalesActivity : AppCompatActivity() {
         misAnimalesAdapter!!.stopListening()
 
     }
+    override fun onBackPressed(){
+
+    }
 }

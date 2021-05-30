@@ -85,6 +85,11 @@ class RegistroActivity : AppCompatActivity() {
                 builder.show()
             }
         }
+
+        btnVolverRegistro.setOnClickListener{
+            var intent= Intent(this,InicioActivity::class.java)
+            startActivity(intent)
+        }
     }
     private fun mostrarGaleria(){
         val intentGaleria=Intent(Intent.ACTION_PICK)
@@ -197,5 +202,8 @@ class RegistroActivity : AppCompatActivity() {
         builder.setPositiveButton("Aceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+    override fun onBackPressed(){
+
     }
 }

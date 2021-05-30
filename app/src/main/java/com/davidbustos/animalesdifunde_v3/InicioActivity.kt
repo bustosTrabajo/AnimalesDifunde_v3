@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -22,12 +23,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_inicio.*
 import kotlinx.android.synthetic.main.activity_registro.*
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 class InicioActivity : AppCompatActivity() {
     //Autentificación con Google
     private val GOOGLE_SIGN_IN = 100
+
+    //private val callbackManager=CallbackManager.Factory.create()
 
     //Autentificación con Firebase
     private val auth = Firebase.auth
@@ -53,9 +54,10 @@ class InicioActivity : AppCompatActivity() {
             cerrarAplicacion()
         }
         btnGoogleLogin.setOnClickListener(){
-            Toast.makeText(this,"Login con Google", Toast.LENGTH_LONG).show()
+            Log.i("Google","Botón de Google");
             /*
             //Configuración
+
             val googleConf:GoogleSignInOptions =
                 GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.default_web_client_id))
@@ -65,24 +67,13 @@ class InicioActivity : AppCompatActivity() {
             val googleClient: GoogleSignInClient = GoogleSignIn.getClient(this, googleConf)
             googleClient.signOut()
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
-             */
 
+             */
         }
         btnFacebookLogin.setOnClickListener{
-            Toast.makeText(this,"Login con Facebook", Toast.LENGTH_LONG).show()
-            //Configuración
-
-
-
-
+            Log.i("Facebook","Botón de Facebook");
         }
-
-
-
-
     }
-
-
     override fun onBackPressed(){
 
     }

@@ -45,7 +45,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/logoperro" />
+                app:srcCompat="@drawable/perrologo" />
 
             <ImageView
                 android:id="@+id/logoGato"
@@ -54,7 +54,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/logogato" />
+                app:srcCompat="@drawable/gatologo" />
 
             <ImageView
                 android:id="@+id/logoReptil"
@@ -63,7 +63,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/logoreptil" />
+                app:srcCompat="@drawable/reptillogo" />
 
             <ImageView
                 android:id="@+id/logoPajaro"
@@ -72,7 +72,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/logopajaro" />
+                app:srcCompat="@drawable/pajarologo" />
 
             <ImageView
                 android:id="@+id/logoExotico"
@@ -81,7 +81,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/logoexotico" />
+                app:srcCompat="@drawable/reptillogo" />
         </LinearLayout>
 
         <TextView
