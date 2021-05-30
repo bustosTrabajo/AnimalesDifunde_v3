@@ -26,7 +26,6 @@ class AnimalesDifundeActivity : AppCompatActivity() {
     lateinit var drawerLayout: DrawerLayout
     lateinit var navigationView: NavigationView
     //Todos los Animales
-
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private val collectionReference: CollectionReference = db.collection("animales")
 
@@ -68,6 +67,11 @@ class AnimalesDifundeActivity : AppCompatActivity() {
 
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = animalesAdapter
+
+    }
+
+    fun setUpRecyclerView2(){
+
 
     }
     override fun onBackPressed(){

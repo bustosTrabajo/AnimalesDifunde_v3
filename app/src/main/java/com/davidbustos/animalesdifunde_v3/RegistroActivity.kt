@@ -30,6 +30,8 @@ class RegistroActivity : AppCompatActivity() {
 
     //Autentificación con Firebase
     private val auth= Firebase.auth
+    //Autentificación con Google
+
     var autentificacion:Boolean=false
 
     //Iniciar Base de Datos

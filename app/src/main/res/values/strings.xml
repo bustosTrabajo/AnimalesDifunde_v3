@@ -2,4 +2,14 @@
     <string name="app_name">AnimalesDifunde_v3</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="facebook_app_id">165715248852366</string>
+    <string name="fb_login_protocol_scheme">fb165715248852366</string>
+
+    <string-array name="tiposAnimales">
+        <item>Perro</item>
+        <item>Gato</item>
+        <item>Pájaro</item>
+        <item>Reptil</item>
+        <item>Exótico</item>
+    </string-array>
 </resources>
