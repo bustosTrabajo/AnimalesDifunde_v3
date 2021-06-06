@@ -27,7 +27,6 @@ class AnimalesDifundeActivity : AppCompatActivity(){
     lateinit var navigationView: NavigationView
     //Base de Datos de Firestore
     private var db = Firebase.firestore
-
     //Usuario
     val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
 
@@ -124,7 +123,6 @@ class AnimalesDifundeActivity : AppCompatActivity(){
                 (recycler?.adapter as AnimalesAdapter).setData(listaAnimales)
 
             }
-
         //Actualización del Recycler
         db.collection("animales")
             .addSnapshotListener{ animales, error ->
@@ -136,10 +134,7 @@ class AnimalesDifundeActivity : AppCompatActivity(){
                     }
                 }
             }
-
-
     }
-
     private fun animalSelected(animal: Animal) {
         val intent=Intent(this,AnimalActivity::class.java)
         intent.putExtra("nombreAnimal",animal.nombre)

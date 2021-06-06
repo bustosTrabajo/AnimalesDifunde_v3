@@ -24,24 +24,14 @@ import kotlinx.android.synthetic.main.activity_subir_animal.*
 
 class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener, AdapterView.OnItemClickListener{
 
-    //Iniciar Base de Datos
-    private val fStoreDB= FirebaseFirestore.getInstance()
-    //Usuario
-    val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
-
-    private var listView: ListView?=null
-
-    private var arrayAdapter: ArrayAdapter<String>?=null
-
     //Google Maps
     private lateinit var map: GoogleMap
     private lateinit var marker: Marker
-
-
     //Datos de Animal
     private var nombreAnimal:String=""
     private var tipoAnimal:String=""
     private var razaAnimal:String=""
+    //Latitud - Longitud
     private var latitud:String=""
     private var longitud:String=""
 
@@ -54,28 +44,24 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subir_animal)
 
-        arrayAdapter= ArrayAdapter(applicationContext,
-            android.R.layout.simple_list_item_single_choice,
-            resources.getStringArray(R.array.tiposAnimales))
+        recogerDatos()
 
-        listView=findViewById(R.id.my_single_list_view)
-        listView?.adapter=arrayAdapter
-        listView?.choiceMode =ListView.CHOICE_MODE_SINGLE
-        listView?.onItemClickListener=this
-
-        btnRegistroNuevoAnimal.setOnClickListener(){
-            registrarAnimal(etNombreAnimalRegistro.text.toString(), tipoAnimal, etRazaAnimalRegistro.text.toString())
+        btnSiguiente.setOnClickListener(){
+            tercerPaso(nombreAnimal, tipoAnimal, razaAnimal,latitud,longitud)
         }
-        btnVolverInicio.setOnClickListener(){
-            var intent= Intent(this,InicioActivity::class.java)
+        btnAnterior.setOnClickListener(){
+            var intent= Intent(this,SubirAnimalActivity::class.java)
             startActivity(intent)
         }
-
-
         createMapFragment()
-
-
     }
+    private fun recogerDatos(){
+        //Recogemos datos de Animal
+        intent.getStringExtra("nombreAnimal")?.let{nombreAnimal=it}
+        intent.getStringExtra("tipoAnimal")?.let{tipoAnimal=it}
+        intent.getStringExtra("razaAnimal")?.let{tipoAnimal=it}
+    }
+
     override fun onBackPressed(){
 
     }
@@ -88,44 +74,25 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
         map= googleMap!!
         //Add marker in Sydney and move the camera
         var m1: LatLng = LatLng(50.0,50.0)
-        marker=map.addMarker(MarkerOptions().position(m1).draggable(true).title("marker 1"))
-
+        marker=map.addMarker(MarkerOptions().position(m1).draggable(true).title("Marcador del Mapa"))
         //map.setOnMarkerClickListener(this)
         map.setOnMarkerDragListener(this)
         map.moveCamera(CameraUpdateFactory.newLatLng(m1))
 
-
-    }
-    private fun createMarker(){
-        val coordinates = LatLng(28.043893,-16.539329)
-        val marker :MarkerOptions? =MarkerOptions().position(coordinates).title("Mi playa favorita!")
-        map.addMarker(marker)
-        map.animateCamera(
-            CameraUpdateFactory.newLatLngZoom(coordinates, 18f),
-            4000, null
-        )
     }
 
-    private fun registrarAnimal(nombreAnimal:String,tipoAnimal:String,razaAnimal:String){
-        val animal=hashMapOf("nombre" to nombreAnimal, "raza" to razaAnimal, "tipo" to tipoAnimal, "usuario" to usuario, "latitud" to latitud, "longitud" to longitud)
-
-        fStoreDB.collection("animales")
-            .document(nombreAnimal)
-            .set(animal as Map<String, Any>)
-            .addOnSuccessListener{ documentReference ->
-                Log.e("TAG", "Success")
-            }
-            .addOnFailureListener { e ->
-                Log.e("TAG","Error adding document",e)
-            }
-    }
 
     private fun tercerPaso(nombreAnimal:String,tipoAnimal:String,razaAnimal:String,latitud:String,longitud:String){
+        val intent=Intent(this,FotoActivity::class.java)
 
-    }
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        tipoAnimal= parent?.getItemAtPosition(position) as String
-        Toast.makeText(this,"Tipo de Animal: "+tipoAnimal,Toast.LENGTH_LONG).show()
+        intent.putExtra("nombreAnimal",nombreAnimal)
+        intent.putExtra("tipoAnimal",tipoAnimal)
+        intent.putExtra("razaAnimal",razaAnimal)
+        intent.putExtra("latitud",latitud)
+        intent.putExtra("longitud",longitud)
+
+        startActivity(intent)
+
     }
 
     override fun onMyLocationButtonClick(): Boolean {
