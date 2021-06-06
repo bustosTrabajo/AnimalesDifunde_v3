@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_subir_animal.*
 
-class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener, AdapterView.OnItemClickListener{
+class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener{
 
     //Google Maps
     private lateinit var map: GoogleMap
@@ -35,7 +35,6 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
     private var latitud:String=""
     private var longitud:String=""
 
-
     companion object{
         const val REQUEST_CODE_LOCATION=0
     }
@@ -46,6 +45,7 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
 
         recogerDatos()
 
+
         btnSiguiente.setOnClickListener(){
             tercerPaso(nombreAnimal, tipoAnimal, razaAnimal,latitud,longitud)
         }
@@ -54,6 +54,7 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
             startActivity(intent)
         }
         createMapFragment()
+
     }
     private fun recogerDatos(){
         //Recogemos datos de Animal
@@ -66,7 +67,8 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
 
     }
     private fun createMapFragment(){
-        val mapFragment: SupportMapFragment =supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        //val mapFragment: SupportMapFragment =supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment:SupportMapFragment=supportFragmentManager.map as SupportMapFragment
         mapFragment.getMapAsync(this)
 
     }
@@ -80,7 +82,6 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
         map.moveCamera(CameraUpdateFactory.newLatLng(m1))
 
     }
-
 
     private fun tercerPaso(nombreAnimal:String,tipoAnimal:String,razaAnimal:String,latitud:String,longitud:String){
         val intent=Intent(this,FotoActivity::class.java)

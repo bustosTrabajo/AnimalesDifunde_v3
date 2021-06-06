@@ -70,34 +70,13 @@
                 <ListView
                     android:id="@+id/my_single_list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="314dp" />
+                    android:layout_height="320dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
-                    <!--
-                    <Button
-                        android:id="@+id/btnVolverInicio"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:text="VOLVER"
-                        android:layout_weight="1"
-                        />
-
-                    <Button
-                        android:id="@+id/btnRegistroNuevoAnimal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="20dp"
-                        android:layout_weight="1"
-                        android:text="SIGUIENTE" />
-                        -->
 
                     <ImageButton
                         android:id="@+id/btnAnterior"

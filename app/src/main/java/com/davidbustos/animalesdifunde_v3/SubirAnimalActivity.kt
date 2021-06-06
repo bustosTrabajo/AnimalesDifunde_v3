@@ -35,16 +35,10 @@ class SubirAnimalActivity : AppCompatActivity() , AdapterView.OnItemClickListene
 
     private var tipoAnimal:String=""
 
-    //Google Maps
-    private lateinit var map: GoogleMap
-    private lateinit var marker: Marker
 
     private var latitud:String=""
     private var longitud:String=""
 
-    companion object{
-        const val REQUEST_CODE_LOCATION=0
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,21 +66,6 @@ class SubirAnimalActivity : AppCompatActivity() , AdapterView.OnItemClickListene
     }
     override fun onBackPressed(){
 
-    }
-
-
-    private fun registrarAnimal(nombreAnimal:String,tipoAnimal:String,razaAnimal:String){
-        val animal=hashMapOf("nombre" to nombreAnimal, "raza" to razaAnimal, "tipo" to tipoAnimal, "usuario" to usuario, "latitud" to latitud, "longitud" to longitud)
-
-        fStoreDB.collection("animales")
-            .document(nombreAnimal)
-            .set(animal as Map<String, Any>)
-            .addOnSuccessListener{ documentReference ->
-                Log.e("TAG", "Success")
-            }
-            .addOnFailureListener { e ->
-                Log.e("TAG","Error adding document",e)
-            }
     }
 
     private fun segundoPaso(nombreAnimal:String, tipoAnimal:String, razaAnimal:String){

@@ -46,11 +46,26 @@ class FotoActivity : AppCompatActivity() {
         btnSiguiente.setOnClickListener(){
             //Comprobar si foto ha sido ya subida con éxito
             registrarAnimal(nombreAnimal, tipoAnimal, razaAnimal,latitud,longitud)
+
         }
+        /*
+        btnAnterior.setOnClickListener(){
+            //Volver al paso anterior
+            val intent=Intent(this,UbicacionActivity::class.java)
+
+            intent.putExtra("nombreAnimal",nombreAnimal)
+            intent.putExtra("tipoAnimal",tipoAnimal)
+            intent.putExtra("razaAnimal",razaAnimal)
+
+
+            startActivity(intent)
+        }
+        */
 
         btnFotoAnimal.setOnClickListener(){
             checkPermissions()
         }
+
     }
 
 
