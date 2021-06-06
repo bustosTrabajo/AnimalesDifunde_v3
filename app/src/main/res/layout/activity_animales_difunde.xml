@@ -13,30 +13,49 @@
         android:layout_height="match_parent">
 
 
-        <SearchView
-            android:id="@+id/busquedaPorNombre"
+        <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </SearchView>
+            <ImageButton
+                android:id="@+id/btnBusquedaPorNombre"
+                android:layout_width="75dp"
+                android:layout_height="40dp"
+                android:background="#00D33030"
+                app:srcCompat="@drawable/ic_lupa" />
+
+            <EditText
+                android:id="@+id/et_busquedaPorNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:ems="10"
+                android:hint="Búsqueda por nombre"
+                android:inputType="textPersonName"
+
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
-            android:layout_height="75dp"
+            android:layout_height="45dp"
             android:layout_marginStart="35dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="35dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/busquedaPorNombre">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
             <ImageView
                 android:id="@+id/logoPerro"

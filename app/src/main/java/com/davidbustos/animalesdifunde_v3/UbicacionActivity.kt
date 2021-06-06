@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_subir_animal.*
 
-class SubirAnimalActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener, AdapterView.OnItemClickListener{
+class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener, AdapterView.OnItemClickListener{
 
     //Iniciar Base de Datos
     private val fStoreDB= FirebaseFirestore.getInstance()
@@ -33,14 +33,18 @@ class SubirAnimalActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.
 
     private var arrayAdapter: ArrayAdapter<String>?=null
 
-    private var tipoAnimal:String=""
-
     //Google Maps
     private lateinit var map: GoogleMap
     private lateinit var marker: Marker
 
+
+    //Datos de Animal
+    private var nombreAnimal:String=""
+    private var tipoAnimal:String=""
+    private var razaAnimal:String=""
     private var latitud:String=""
     private var longitud:String=""
+
 
     companion object{
         const val REQUEST_CODE_LOCATION=0
@@ -116,8 +120,8 @@ class SubirAnimalActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.
             }
     }
 
-    private fun segundPaso(nombreAnimal:String,tipoAnimal:String,razaAnimal:String){
-        
+    private fun tercerPaso(nombreAnimal:String,tipoAnimal:String,razaAnimal:String,latitud:String,longitud:String){
+
     }
     override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         tipoAnimal= parent?.getItemAtPosition(position) as String

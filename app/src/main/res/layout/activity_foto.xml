@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FotoActivity"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:text="REGISTRAR NUEVO ANIMAL"
+        />
+    <TextView
+        android:id="@+id/paso1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textStyle="bold|italic"
+        android:text="PASO 3 DE 3 "
+        />
+
+    <TextView
+        android:id="@+id/fotoAnimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:text="REALIZA UNA FOTO A TU ANIMAL"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        >
+        <ImageButton
+            android:id="@+id/anterior"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.5"
+            android:backgroundTint=" #4CAF50"
+            app:srcCompat="@drawable/ic_anterior" />
+
+        <ImageButton
+            android:id="@+id/siguiente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.5"
+            android:backgroundTint=" #4CAF50"
+            app:srcCompat="@drawable/ic_siguiente" />
+    </LinearLayout>
+
+</LinearLayout>

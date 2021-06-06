@@ -5,9 +5,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 //import com.davidbustos.animalesdifundekotlin.AnimalesAdapter
@@ -17,7 +19,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_animales_difunde.*
 
-class AnimalesDifundeActivity : AppCompatActivity() {
+class AnimalesDifundeActivity : AppCompatActivity(){
 
     //Navigation Drawer
     lateinit var toogle: ActionBarDrawerToggle
@@ -28,6 +30,8 @@ class AnimalesDifundeActivity : AppCompatActivity() {
 
     //Usuario
     val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,17 +72,37 @@ class AnimalesDifundeActivity : AppCompatActivity() {
         logoPajaro.setOnClickListener(){
             buscarPorCategoria("Pájaro")
         }
-        //setUpRecyclerView()
+
+        btnBusquedaPorNombre.setOnClickListener(){
+            buscarPorNombre(et_busquedaPorNombre.text.toString())
+        }
+
         todosLosAnimales()
+
+
     }
+    private fun buscarPorNombre(nombreAnimal:String){
+
+        db.collection("animales")
+            .whereEqualTo("nombre", nombreAnimal)
+            .addSnapshotListener{ animales, error ->
+                if(error == null){
+                    animales?.let{
+                        val listaAnimales=it.toObjects(Animal::class.java)
+                        (recycler?.adapter as AnimalesAdapter).setData(listaAnimales)
+                    }
+                }
+            }
+    }
+
     private fun buscarPorCategoria(categoria:String){
         db.collection("animales")
             .whereEqualTo("tipo", categoria)
             .addSnapshotListener{ animales, error ->
             if(error == null){
                 animales?.let{
-                    val listaAnimales2=it.toObjects(Animal::class.java)
-                    (recycler?.adapter as AnimalesAdapter).setData(listaAnimales2)
+                    val listaAnimales=it.toObjects(Animal::class.java)
+                    (recycler?.adapter as AnimalesAdapter).setData(listaAnimales)
                 }
             }
         }
@@ -112,6 +136,8 @@ class AnimalesDifundeActivity : AppCompatActivity() {
                     }
                 }
             }
+
+
     }
 
     private fun animalSelected(animal: Animal) {
@@ -164,3 +190,4 @@ class AnimalesDifundeActivity : AppCompatActivity() {
     }
 
 }
+

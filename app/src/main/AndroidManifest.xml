@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AnimalesDifunde_v3">
-        <activity android:name=".MisAmigosActivity"></activity>
+        <activity android:name=".FotoActivity"></activity>
+        <activity android:name=".UbicacionActivity" />
+        <activity android:name=".MisAmigosActivity" />
         <activity android:name=".AnimalActivity" />
 
         <meta-data
