@@ -6,10 +6,10 @@ import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_mi_perfil_activities.*
+import kotlinx.android.synthetic.main.activity_perfil_usuario.*
 
 
-class MiPerfilActivity : AppCompatActivity() {
+class PerfilUsuarioActivity : AppCompatActivity() {
 
     //Usuario
     val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
@@ -20,7 +20,7 @@ class MiPerfilActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mi_perfil_activities)
+        setContentView(R.layout.activity_perfil_usuario)
 
         datosMiPerfil()
 
@@ -46,7 +46,7 @@ class MiPerfilActivity : AppCompatActivity() {
         }
 
         btnVolver.setOnClickListener(){
-            var intent= Intent(this,InicioActivity::class.java)
+            var intent= Intent(this,AnimalesDifundeActivity::class.java)
             startActivity(intent)
         }
 

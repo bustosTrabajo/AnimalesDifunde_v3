@@ -1,52 +1,38 @@
-package com.davidbustos.animalesdifundekotlin
+package com.davidbustos.animalesdifunde_v3
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.davidbustos.animalesdifunde_v3.Animal
-import com.davidbustos.animalesdifunde_v3.R
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.android.synthetic.main.carta_animal.view.*
 
-class AnimalesAdapter(options: FirestoreRecyclerOptions<Animal>
+class AnimalesAdapter(val animalClick: (Animal)->Unit): RecyclerView.Adapter<AnimalesAdapter.AnimalesViewHolder>() {
 
-                      ) : FirestoreRecyclerAdapter<Animal, AnimalesAdapter.AnimalesAdapterVH>(options) {
+    var animales:List<Animal> =emptyList()
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalesAdapterVH {
-
-        return AnimalesAdapterVH(LayoutInflater.from(parent.context).inflate(R.layout.carta_animal,parent,false))
-
+    fun setData(list:List<Animal>){
+        animales=list
+        notifyDataSetChanged()
     }
-    override fun onBindViewHolder(holder: AnimalesAdapterVH, position: Int, model: Animal) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalesViewHolder {
+        return AnimalesViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.carta_animal,
+                parent, false
+            )
 
-        holder.tv_nombreAnimal.text=model.nombre
-        holder.tv_tipoAnimal.text=model.tipo
-        holder.tv_razaAnimal.text=model.raza
-        holder.tv_usuarioAnimal.text=model.usuario
-
+        )
     }
+    override fun onBindViewHolder(holder: AnimalesViewHolder, position: Int) {
 
-    inner class AnimalesAdapterVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tv_nombreAnimal:TextView
-        var tv_tipoAnimal:TextView
-        var tv_razaAnimal:TextView
-        var tv_usuarioAnimal:TextView
+        holder.itemView.tv_nombreAnimal.text =animales[position].nombre
 
-        init{
-            tv_nombreAnimal=itemView.tv_nombreAnimal
-            tv_tipoAnimal=itemView.tv_tipoAnimal
-            tv_razaAnimal=itemView.tv_razaAnimal
-            tv_usuarioAnimal=itemView.tv_usuarioAnimal
-
-
+        holder.itemView.setOnClickListener(){
+            animalClick(animales[position])
         }
     }
+    override fun getItemCount(): Int {
+        return animales.size
+    }
+    class AnimalesViewHolder(itemView: android.view.View):RecyclerView.ViewHolder(itemView)
 
 }
-

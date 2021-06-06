@@ -1,14 +1,11 @@
 package com.davidbustos.animalesdifunde_v3
+import java.util.*
 
-
-class Animal {
-    var nombre:String?=null
-    var tipo:String?=null
-    var raza:String?=null
-    var usuario:String?=null
-    var latitud:String?=null
+data class Animal(
+    var nombre:String="",
+    var tipo:String="",
+    var raza:String="",
+    var usuario:String="",
+    var latitud:String="",
     var longitud:String?=null
-
-    constructor()
-
-}
+)

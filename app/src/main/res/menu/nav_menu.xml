@@ -18,6 +18,11 @@
         />
     <item
         android:id="@+id/item4"
+        android:title="Amigos"
+        android:icon="@drawable/ic_amigos"
+        />
+    <item
+        android:id="@+id/item5"
         android:title="Cerrar Sesión"
         android:icon="@drawable/ic_cerrar_sesion"
         />

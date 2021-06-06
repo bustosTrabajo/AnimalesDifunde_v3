@@ -10,13 +10,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.davidbustos.animalesdifundekotlin.AnimalesAdapter
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
+//import com.davidbustos.animalesdifundekotlin.AnimalesAdapter
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_animales_difunde.*
 
 class AnimalesDifundeActivity : AppCompatActivity() {
@@ -25,11 +23,11 @@ class AnimalesDifundeActivity : AppCompatActivity() {
     lateinit var toogle: ActionBarDrawerToggle
     lateinit var drawerLayout: DrawerLayout
     lateinit var navigationView: NavigationView
-    //Todos los Animales
-    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val collectionReference: CollectionReference = db.collection("animales")
+    //Base de Datos de Firestore
+    private var db = Firebase.firestore
 
-    var animalesAdapter: AnimalesAdapter?=null
+    //Usuario
+    val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +46,12 @@ class AnimalesDifundeActivity : AppCompatActivity() {
                 R.id.item1 -> miPerfil()
                 R.id.item2 -> misAnimales()
                 R.id.item3 -> misMensajes()
-                R.id.item4 -> cerrarSesion()
+                R.id.item4 -> misAmigos()
+                R.id.item5 -> cerrarSesion()
 
             }
             true
         }
-
         logoPerro.setOnClickListener(){
             Toast.makeText(this,"Cargar Recycler con animales de tipo Perro",Toast.LENGTH_LONG).show()
             buscarPorCategoria("Perro")
@@ -70,61 +68,65 @@ class AnimalesDifundeActivity : AppCompatActivity() {
         logoPajaro.setOnClickListener(){
             buscarPorCategoria("Pájaro")
         }
-
-
-        setUpRecyclerView()
-
+        //setUpRecyclerView()
+        todosLosAnimales()
     }
     private fun buscarPorCategoria(categoria:String){
-        val query: Query =collectionReference.whereEqualTo("tipo", categoria);
-
-        val firestoreRecyclerOptions: FirestoreRecyclerOptions<Animal> = FirestoreRecyclerOptions.Builder<Animal>()
-            .setQuery(query,Animal::class.java)
-            .build();
-
-        animalesAdapter = AnimalesAdapter(firestoreRecyclerOptions);
-
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = animalesAdapter
+        db.collection("animales")
+            .whereEqualTo("tipo", categoria)
+            .addSnapshotListener{ animales, error ->
+            if(error == null){
+                animales?.let{
+                    val listaAnimales2=it.toObjects(Animal::class.java)
+                    (recycler?.adapter as AnimalesAdapter).setData(listaAnimales2)
+                }
+            }
+        }
     }
 
+    fun todosLosAnimales(){
+        recycler?.layoutManager=LinearLayoutManager(this)
 
-    fun setUpRecyclerView(){
-        val query: Query =collectionReference;
-        val firestoreRecyclerOptions: FirestoreRecyclerOptions<Animal> = FirestoreRecyclerOptions.Builder<Animal>()
-            .setQuery(query,Animal::class.java)
-            .build();
+        recycler?.adapter=
+            AnimalesAdapter{ animal->
+                animalSelected(animal)
+            }
+        //Recogemos lista de animales de la BD
+        db.collection("animales")
+            .get()
+            .addOnSuccessListener{ animales ->
+                val listaAnimales=animales.toObjects(Animal::class.java)
 
-        animalesAdapter = AnimalesAdapter(firestoreRecyclerOptions);
+                (recycler?.adapter as AnimalesAdapter).setData(listaAnimales)
 
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = animalesAdapter
+            }
 
+        //Actualización del Recycler
+        db.collection("animales")
+            .addSnapshotListener{ animales, error ->
+                if(error == null){
+                    animales?.let{
+                        val listaAnimales=it.toObjects(Animal::class.java)
+
+                        (recycler?.adapter as AnimalesAdapter).setData(listaAnimales)
+                    }
+                }
+            }
     }
 
-    fun setUpRecyclerView2(){
-
-
+    private fun animalSelected(animal: Animal) {
+        val intent=Intent(this,AnimalActivity::class.java)
+        intent.putExtra("nombreAnimal",animal.nombre)
+        startActivity(intent)
     }
+
     override fun onBackPressed(){
 
     }
 
-    override fun onStart(){
-        super.onStart()
-        animalesAdapter!!.startListening()
-
-
-    }
-    override fun onDestroy(){
-        super.onDestroy()
-        animalesAdapter!!.stopListening()
-
-
-    }
-
     private fun miPerfil() {
-        var intent= Intent(this, MiPerfilActivity::class.java)
+        var intent= Intent(this, PerfilUsuarioActivity::class.java)
+        intent.putExtra("usuario",usuario)
         startActivity(intent)
     }
     private fun misAnimales(){
@@ -134,6 +136,10 @@ class AnimalesDifundeActivity : AppCompatActivity() {
     }
     private fun misMensajes(){
         var intent= Intent(this, MisMensajesActivity::class.java)
+        startActivity(intent)
+    }
+    private fun misAmigos(){
+        var intent= Intent(this, MisAmigosActivity::class.java)
         startActivity(intent)
     }
     private fun cerrarSesion(){
@@ -149,16 +155,12 @@ class AnimalesDifundeActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
     private fun cargarDatos(){
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         var usuario=sharedPreferences.getString("usuario","no usuario")
         Toast.makeText(applicationContext,"Nombre de Usuario: {$usuario}", Toast.LENGTH_LONG).show()
 
     }
-    private fun recogerImagen(){
-
-
-    }
-
 
 }

@@ -4,23 +4,20 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.davidbustos.animalesdifundekotlin.AnimalesAdapter
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_animales_difunde.*
 import kotlinx.android.synthetic.main.activity_mis_animales.*
+import kotlinx.android.synthetic.main.activity_mis_animales.btnVolver
 
 class MisAnimalesActivity : AppCompatActivity() {
 
     //Usuario
     val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
-    //Mis Animales
-    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val collectionReference: CollectionReference = db.collection("animales")
-    var misAnimalesAdapter: AnimalesAdapter?=null
+
+    //Base de Datos de Firestore
+    private var db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +26,11 @@ class MisAnimalesActivity : AppCompatActivity() {
         btnSubirNuevoAnimal.setOnClickListener(){
             subirAnimal()
         }
-        setUpRecyclerViewMisAnimales()
+        btnVolver.setOnClickListener(){
+            var intent= Intent(this,AnimalesDifundeActivity::class.java)
+            startActivity(intent)
+        }
+        misAnimales()
 
     }
     private fun subirAnimal(){
@@ -37,31 +38,46 @@ class MisAnimalesActivity : AppCompatActivity() {
         startActivity(intent)
 
     }
-    private fun setUpRecyclerViewMisAnimales(){
-        val query=collectionReference.whereEqualTo("usuario", usuario)
-        val firestoreRecyclerOptions: FirestoreRecyclerOptions<Animal> = FirestoreRecyclerOptions.Builder<Animal>()
-            .setQuery(query,Animal::class.java)
-            .build();
 
-        misAnimalesAdapter = AnimalesAdapter(firestoreRecyclerOptions);
+    fun misAnimales(){
+        recyclerMisAnimales?.layoutManager=LinearLayoutManager(this)
 
-        recyclerMisAnimales.layoutManager = LinearLayoutManager(this)
-        recyclerMisAnimales.adapter = misAnimalesAdapter
+        recyclerMisAnimales?.adapter=
+            AnimalesAdapter{ animal->
+                animalSelected(animal)
+            }
+        //Recogemos lista de animales de la BD de Mis Animales
+        db.collection("animales")
+            .whereEqualTo("usuario", usuario)
+            .get()
+            .addOnSuccessListener{ animales ->
+                val listaAnimales=animales.toObjects(Animal::class.java)
+
+                (recyclerMisAnimales?.adapter as AnimalesAdapter).setData(listaAnimales)
+
+            }
+
+        //Actualización del Recycler de Mis Animales
+        db.collection("animales")
+            .whereEqualTo("usuario", usuario)
+            .addSnapshotListener{ animales, error ->
+                if(error == null){
+                    animales?.let{
+                        val listaAnimales=it.toObjects(Animal::class.java)
+
+                        (recyclerMisAnimales?.adapter as AnimalesAdapter).setData(listaAnimales)
+                    }
+                }
+            }
+    }
+
+    private fun animalSelected(animal2: Animal) {
+        val intent=Intent(this,AnimalActivity::class.java)
+        intent.putExtra("nombreAnimal",animal2.nombre)
+        startActivity(intent)
 
     }
 
-    override fun onStart(){
-        super.onStart()
-        misAnimalesAdapter!!.startListening()
-
-
-    }
-
-    override fun onDestroy(){
-        super.onDestroy()
-        misAnimalesAdapter!!.stopListening()
-
-    }
     override fun onBackPressed(){
 
     }
