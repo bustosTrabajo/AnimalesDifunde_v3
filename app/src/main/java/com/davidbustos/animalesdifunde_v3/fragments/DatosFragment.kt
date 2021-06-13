@@ -27,6 +27,11 @@ class DatosFragment: Fragment() {
     //Usuario
     val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
 
+    //Firebase
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private val collectionReference: CollectionReference = db.collection("animales")
+
+
     //Recoger datos de Actividad
     private val ARGS_NAME = "name";
     private val nombre by lazy { arguments?.getString(ARGS_NAME) }
@@ -62,6 +67,21 @@ class DatosFragment: Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        etNombreAnimalPerfil.setEnabled(false)
+        btnGuardarAnimal.setOnClickListener{
+            collectionReference.document(etNombreAnimalPerfil.text.toString()).set(
+                hashMapOf(
+                    "raza"  to etRazaAnimalPerfil.text.toString(),
+                    "tipo" to etTipoAnimalPerfil.text.toString()
+                )
+            )
+        }
+        btnLimpiarAnimal.setOnClickListener{
+            etRazaAnimalPerfil.setText("")
+            etTipoAnimalPerfil.setText("")
+
+        }
 
         val etNombre:EditText=view!!.findViewById(R.id.etNombreAnimalPerfil)
         etNombre.setText(nombre)

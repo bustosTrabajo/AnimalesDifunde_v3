@@ -30,6 +30,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_animales_difunde.*
 import kotlinx.android.synthetic.main.activity_perfil_usuario.*
+import kotlinx.android.synthetic.main.fragment_datos.*
 
 class AnimalActivity : AppCompatActivity(){
     //implementar OnMapReadyCallBack
@@ -84,10 +85,13 @@ class AnimalActivity : AppCompatActivity(){
             }
             true
         }
+
+
         setUpTabs()
 
     }
     override fun onBackPressed(){
+
     }
     private fun setUpTabs(){
         val adapter= ViewPagerAdapter(supportFragmentManager)

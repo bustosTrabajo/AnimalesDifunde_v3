@@ -33,32 +33,35 @@ import com.google.android.gms.maps.SupportMapFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 
+
 import kotlinx.android.synthetic.main.fragment_ubicacion.*
 
 
 class UbicacionFragment() : Fragment(),OnMapReadyCallback{
 
     //implementar OnMapReadyCallback
+    private lateinit var mapAnimal:GoogleMap
 
     //Usuario
     val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
 
     //Recoger tipo de Actividad
-    private val ARGS_LATITUD= "latitud";
+    private val ARGS_LATITUD= "";
     private val latitud by lazy { arguments?.getString(ARGS_LATITUD) }
+    private var latitudDouble:Double =0.0
+    private var longitudDouble:Double = 0.0
 
     //Recoger tipo de Actividad
-    private val ARGS_LONGITUD = "longitud";
+    private  val ARGS_LONGITUD = "";
     private val longitud by lazy { arguments?.getString(ARGS_LONGITUD) }
 
     //Google Maps
-    private lateinit var map: GoogleMap
+    private lateinit var mapUbicacion: GoogleMap
     private lateinit var marker: Marker
 
     companion object{
         const val REQUEST_CODE_LOCATION=0
     }
-
 
     //Recoger Datos de Actividad creada. Ubicacion de Animal
     fun newInstanceUbicacion(latitud:String,longitud:String): Fragment{
@@ -85,30 +88,29 @@ class UbicacionFragment() : Fragment(),OnMapReadyCallback{
 
         val txtLatitud:TextView=view!!.findViewById(R.id.txtLatitudAnimal)
         txtLatitud.setText("Latitud ->"+latitud)
-        Log.i("Valor Componente",""+latitud)
-
+        latitudDouble=latitud?.toDouble() !!
+        Log.i("Latitud Double ",""+latitudDouble)
         val txtLongitud:TextView=view!!.findViewById(R.id.txtLongitudAnimal)
         txtLongitud.setText("Longitud ->"+longitud)
-        Log.i("Valor Componente",""+longitud)
+        longitudDouble=longitud?.toDouble() !!
+        Log.i("Longitud Double",""+longitudDouble)
 
-        createMapFragment()
+        map_view.onCreate(savedInstanceState)
+        map_view.onResume()
 
-    }
-    private fun createMapFragment(){
-        val mapFragment: SupportMapFragment =supportFragmentManager.findFragmentById(R.id.mapa) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        map_view.getMapAsync(this)
 
 
     }
     override fun onMapReady(googleMap: GoogleMap?) {
-        map= googleMap!!
-        //Add marker in Sydney and move the camera
-        var m1: LatLng = LatLng(50.0,50.0)
-        marker=map.addMarker(MarkerOptions().position(m1).draggable(true).title("Marcador del Mapa"))
-        //map.setOnMarkerClickListener(this)
-        map.setOnMarkerDragListener(this)
-        map.moveCamera(CameraUpdateFactory.newLatLng(m1))
+        if (googleMap != null) {
+            mapAnimal=googleMap
+
+        }
+        //Add a marker
+        val m1 = LatLng(latitudDouble, longitudDouble)
+        mapAnimal.addMarker(MarkerOptions().position(m1).title("Marker in Sydney"))
+        mapAnimal.moveCamera(CameraUpdateFactory.newLatLng(m1))
 
     }
-
 }

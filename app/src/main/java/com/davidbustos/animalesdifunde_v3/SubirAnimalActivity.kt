@@ -54,14 +54,10 @@ class SubirAnimalActivity : AppCompatActivity() , AdapterView.OnItemClickListene
             var intent= Intent(this,AnimalesDifundeActivity::class.java)
             startActivity(intent)
         }
-
-
-
     }
     override fun onBackPressed(){
 
     }
-
     private fun segundoPaso(nombreAnimal:String, tipoAnimal:String, razaAnimal:String){
 
         val intent=Intent(this,UbicacionActivity::class.java)
