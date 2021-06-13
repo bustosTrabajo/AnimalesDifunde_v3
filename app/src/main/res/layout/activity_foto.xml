@@ -28,7 +28,7 @@
         />
 
     <TextView
-        android:id="@+id/txtFotoAnimal"
+        android:id="@+id/txtFotoUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -61,7 +61,7 @@
         android:layout_marginTop="25dp"
         >
         <ImageButton
-            android:id="@+id/btnAnterior"
+            android:id="@+id/btnAnterior3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -71,7 +71,7 @@
             app:srcCompat="@drawable/ic_anterior" />
 
         <ImageButton
-            android:id="@+id/btnSiguiente"
+            android:id="@+id/btnSiguiente3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"

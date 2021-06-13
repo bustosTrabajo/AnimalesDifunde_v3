@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_subir_animal.*
+import kotlinx.android.synthetic.main.activity_ubicacion.*
 
 class SubirAnimalActivity : AppCompatActivity() , AdapterView.OnItemClickListener{
 
@@ -28,16 +29,9 @@ class SubirAnimalActivity : AppCompatActivity() , AdapterView.OnItemClickListene
     private val fStoreDB= FirebaseFirestore.getInstance()
     //Usuario
     val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
-
     private var listView: ListView?=null
-
     private var arrayAdapter: ArrayAdapter<String>?=null
-
     private var tipoAnimal:String=""
-
-
-    private var latitud:String=""
-    private var longitud:String=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,11 +47,11 @@ class SubirAnimalActivity : AppCompatActivity() , AdapterView.OnItemClickListene
         listView?.choiceMode =ListView.CHOICE_MODE_SINGLE
         listView?.onItemClickListener=this
 
-        btnSiguiente.setOnClickListener(){
+        btnSiguiente1.setOnClickListener(){
             segundoPaso(etNombreAnimalRegistro.text.toString(), tipoAnimal, etRazaAnimalRegistro.text.toString())
         }
-        btnAnterior.setOnClickListener(){
-            var intent= Intent(this,InicioActivity::class.java)
+        btnAnterior1.setOnClickListener(){
+            var intent= Intent(this,AnimalesDifundeActivity::class.java)
             startActivity(intent)
         }
 

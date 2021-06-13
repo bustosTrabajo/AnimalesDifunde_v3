@@ -79,7 +79,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/btnAnterior"
+                        android:id="@+id/btnAnterior1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -89,7 +89,7 @@
                         app:srcCompat="@drawable/ic_anterior" />
 
                     <ImageButton
-                        android:id="@+id/btnSiguiente"
+                        android:id="@+id/btnSiguiente1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

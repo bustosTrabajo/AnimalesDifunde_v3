@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.UbicacionFragment"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="UBICACIÓN DEL ANIMAL"
+            android:textAlignment="center"
+            android:textStyle="normal"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/txtLatitudAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Latitud Animal"
+            android:textAlignment="center"
+            android:textStyle="normal"
+        />
+        <TextView
+            android:id="@+id/txtLongitudAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Longitud de Animal"
+            android:textAlignment="center"
+            android:textStyle="normal"
+
+            />
+        <fragment
+            android:id="@+id/ubicacionAnimal"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:layout_marginTop="40dp"
+            tools:context=".MainActivity" />
+    </LinearLayout>
+</FrameLayout>

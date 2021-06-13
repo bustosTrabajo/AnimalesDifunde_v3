@@ -26,6 +26,7 @@ class AnimalesAdapter(val animalClick: (Animal)->Unit): RecyclerView.Adapter<Ani
 
         holder.itemView.tv_nombreAnimal.text =animales[position].nombre
 
+
         holder.itemView.setOnClickListener(){
             animalClick(animales[position])
         }

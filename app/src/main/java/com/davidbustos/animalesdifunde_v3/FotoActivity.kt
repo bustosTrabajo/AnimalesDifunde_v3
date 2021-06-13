@@ -15,8 +15,6 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_foto.*
-import kotlinx.android.synthetic.main.activity_subir_animal.*
-import kotlinx.android.synthetic.main.activity_subir_animal.btnSiguiente
 
 class FotoActivity : AppCompatActivity() {
 
@@ -43,41 +41,42 @@ class FotoActivity : AppCompatActivity() {
 
         recogerDatos()
 
-        btnSiguiente.setOnClickListener(){
+        btnSiguiente3.setOnClickListener(){
             //Comprobar si foto ha sido ya subida con éxito
             registrarAnimal(nombreAnimal, tipoAnimal, razaAnimal,latitud,longitud)
 
         }
-        /*
-        btnAnterior.setOnClickListener(){
+
+        btnAnterior3.setOnClickListener(){
             //Volver al paso anterior
             val intent=Intent(this,UbicacionActivity::class.java)
 
             intent.putExtra("nombreAnimal",nombreAnimal)
             intent.putExtra("tipoAnimal",tipoAnimal)
             intent.putExtra("razaAnimal",razaAnimal)
+            intent.putExtra("latitud",latitud)
+            intent.putExtra("longitud",longitud)
+
 
 
             startActivity(intent)
         }
-        */
+
 
         btnFotoAnimal.setOnClickListener(){
             checkPermissions()
         }
 
     }
-
-
     private fun recogerDatos(){
         //Recogemos datos de Animal
         intent.getStringExtra("nombreAnimal")?.let{nombreAnimal=it}
         intent.getStringExtra("tipoAnimal")?.let{tipoAnimal=it}
-        intent.getStringExtra("razaAnimal")?.let{tipoAnimal=it}
+        intent.getStringExtra("razaAnimal")?.let{razaAnimal=it}
         intent.getStringExtra("latitud")?.let{latitud=it}
         intent.getStringExtra("longitud")?.let{longitud=it}
+        Log.i("DATOS ANIMAL","Datos del Animal -> "+" "+nombreAnimal+" "+tipoAnimal+" "+razaAnimal+" "+latitud+" "+longitud)
     }
-
     private fun registrarAnimal(nombreAnimal:String,tipoAnimal:String,razaAnimal:String,latitud:String,longitud:String){
      val animal=hashMapOf("nombre" to nombreAnimal, "raza" to razaAnimal, "tipo" to tipoAnimal, "usuario" to usuario, "latitud" to latitud, "longitud" to longitud)
 
@@ -86,12 +85,15 @@ class FotoActivity : AppCompatActivity() {
          .set(animal as Map<String, Any>)
          .addOnSuccessListener{ documentReference ->
              Log.e("TAG", "Success")
+             //Volver al paso anterior
+             val intent=Intent(this,AnimalActivity::class.java)
+             intent.putExtra("nombreAnimal",nombreAnimal)
+             startActivity(intent)
          }
          .addOnFailureListener { e ->
              Log.e("TAG","Error adding document",e)
          }
     }
-
     override fun onBackPressed(){
 
     }
@@ -108,9 +110,8 @@ class FotoActivity : AppCompatActivity() {
             openCamera()
         }
     }
-    private fun openCamera(){
-        Toast.makeText(this,"Abriendo cámara", Toast.LENGTH_SHORT).show()
 
+    private fun openCamera(){
         //ContentValues - Manejador de contenidos - Crea un espacio en memoria que rellenará con los bits de la foto
         val value= ContentValues()
         value.put(MediaStore.Images.Media.TITLE, "Nueva imagen")
@@ -131,6 +132,7 @@ class FotoActivity : AppCompatActivity() {
         }
 
     }
+
     private fun requestCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             //El usuario ya ha rechazado los permisos con anterioridad
@@ -143,6 +145,7 @@ class FotoActivity : AppCompatActivity() {
 
         }
     }
+
     //grantResults --> Contiene un array con todos los permisos solicitados y su información contenido. En éste caso, solo habrá la información de un permiso: el de camara.
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

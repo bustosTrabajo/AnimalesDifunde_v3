@@ -71,9 +71,9 @@ class MisAnimalesActivity : AppCompatActivity() {
             }
     }
 
-    private fun animalSelected(animal2: Animal) {
+    private fun animalSelected(animal: Animal) {
         val intent=Intent(this,AnimalActivity::class.java)
-        intent.putExtra("nombreAnimal",animal2.nombre)
+        intent.putExtra("nombreAnimal",animal.nombre)
         startActivity(intent)
 
     }

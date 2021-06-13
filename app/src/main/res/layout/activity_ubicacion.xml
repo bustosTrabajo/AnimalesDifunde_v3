@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SubirAnimalActivity"
+    tools:context=".UbicacionActivity"
     android:orientation="vertical"
     >
     <TextView
@@ -26,6 +26,15 @@
         android:textStyle="bold|italic"
         android:text="PASO 2 DE 3 "
         />
+
+    <fragment
+        android:id="@+id/mapa"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="10dp"
+        tools:context=".MainActivity" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,15 +46,6 @@
             android:orientation="vertical"
             >
 
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                tools:context=".MainActivity" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -53,7 +53,7 @@
                 android:layout_marginTop="25dp"
                 >
                 <ImageButton
-                    android:id="@+id/btnAnterior"
+                    android:id="@+id/btnAnterior2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -63,7 +63,7 @@
                     app:srcCompat="@drawable/ic_anterior" />
 
                 <ImageButton
-                    android:id="@+id/btnSiguiente"
+                    android:id="@+id/btnSiguiente2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"

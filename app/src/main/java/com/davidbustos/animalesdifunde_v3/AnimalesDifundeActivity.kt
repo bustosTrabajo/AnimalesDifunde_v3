@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.AdapterView
 import android.widget.Toast
@@ -30,8 +31,6 @@ class AnimalesDifundeActivity : AppCompatActivity(){
     //Usuario
     val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animales_difunde)
@@ -56,7 +55,6 @@ class AnimalesDifundeActivity : AppCompatActivity(){
             true
         }
         logoPerro.setOnClickListener(){
-            Toast.makeText(this,"Cargar Recycler con animales de tipo Perro",Toast.LENGTH_LONG).show()
             buscarPorCategoria("Perro")
         }
         logoGato.setOnClickListener(){
@@ -78,10 +76,8 @@ class AnimalesDifundeActivity : AppCompatActivity(){
 
         todosLosAnimales()
 
-
     }
     private fun buscarPorNombre(nombreAnimal:String){
-
         db.collection("animales")
             .whereEqualTo("nombre", nombreAnimal)
             .addSnapshotListener{ animales, error ->
@@ -93,7 +89,6 @@ class AnimalesDifundeActivity : AppCompatActivity(){
                 }
             }
     }
-
     private fun buscarPorCategoria(categoria:String){
         db.collection("animales")
             .whereEqualTo("tipo", categoria)
@@ -106,7 +101,6 @@ class AnimalesDifundeActivity : AppCompatActivity(){
             }
         }
     }
-
     fun todosLosAnimales(){
         recycler?.layoutManager=LinearLayoutManager(this)
 
@@ -138,13 +132,23 @@ class AnimalesDifundeActivity : AppCompatActivity(){
     private fun animalSelected(animal: Animal) {
         val intent=Intent(this,AnimalActivity::class.java)
         intent.putExtra("nombreAnimal",animal.nombre)
+        intent.putExtra("tipoAnimal",animal.tipo)
+        intent.putExtra("razaAnimal",animal.raza)
+        intent.putExtra("latitud",animal.latitud)
+        intent.putExtra("longitud",animal.longitud)
+
+        Toast.makeText(this,"Nombre : "+animal.nombre+
+                                            ",Tipo: "+animal.tipo+
+                                                ",Raza: "+animal.raza+
+                                                    ",Latidud: "+animal.latitud+
+                                                        ",Longitud: "+animal.longitud
+                                                                    ,Toast.LENGTH_LONG).show()
+
         startActivity(intent)
     }
-
     override fun onBackPressed(){
 
     }
-
     private fun miPerfil() {
         var intent= Intent(this, PerfilUsuarioActivity::class.java)
         intent.putExtra("usuario",usuario)
@@ -169,20 +173,15 @@ class AnimalesDifundeActivity : AppCompatActivity(){
         var intent= Intent(this, InicioActivity::class.java)
         startActivity(intent)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean{
         if(toogle.onOptionsItemSelected(item)){
             true
         }
         return super.onOptionsItemSelected(item)
     }
-
     private fun cargarDatos(){
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         var usuario=sharedPreferences.getString("usuario","no usuario")
-        Toast.makeText(applicationContext,"Nombre de Usuario: {$usuario}", Toast.LENGTH_LONG).show()
-
     }
-
 }
 

@@ -2,15 +2,15 @@ package com.davidbustos.animalesdifunde_v3
 
 import android.Manifest
 import android.content.Intent
+import android.os.Bundle
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.util.Log
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+//Maps
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,9 +18,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_subir_animal.*
+
+import kotlinx.android.synthetic.main.activity_ubicacion.*
+
 
 class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener{
 
@@ -28,12 +28,13 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
     private lateinit var map: GoogleMap
     private lateinit var marker: Marker
     //Datos de Animal
-    private var nombreAnimal:String=""
-    private var tipoAnimal:String=""
-    private var razaAnimal:String=""
+    private lateinit var nombreAnimal:String
+    private lateinit var tipoAnimal:String
+    private lateinit var razaAnimal:String
     //Latitud - Longitud
     private var latitud:String=""
     private var longitud:String=""
+
 
     companion object{
         const val REQUEST_CODE_LOCATION=0
@@ -41,18 +42,19 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_subir_animal)
+        setContentView(R.layout.activity_ubicacion)
 
         recogerDatos()
 
-
-        btnSiguiente.setOnClickListener(){
-            tercerPaso(nombreAnimal, tipoAnimal, razaAnimal,latitud,longitud)
+        btnSiguiente2.setOnClickListener(){
+            tercerPaso(nombreAnimal, tipoAnimal, razaAnimal, latitud, longitud)
         }
-        btnAnterior.setOnClickListener(){
+        btnAnterior2.setOnClickListener(){
             var intent= Intent(this,SubirAnimalActivity::class.java)
             startActivity(intent)
         }
+
+
         createMapFragment()
 
     }
@@ -60,15 +62,18 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
         //Recogemos datos de Animal
         intent.getStringExtra("nombreAnimal")?.let{nombreAnimal=it}
         intent.getStringExtra("tipoAnimal")?.let{tipoAnimal=it}
-        intent.getStringExtra("razaAnimal")?.let{tipoAnimal=it}
+        intent.getStringExtra("razaAnimal")?.let{razaAnimal=it}
+        Log.i("i","Datos del Animal -> "+" "+nombreAnimal+" "+tipoAnimal+" "+razaAnimal)
+
     }
 
     override fun onBackPressed(){
 
     }
     private fun createMapFragment(){
-        //val mapFragment: SupportMapFragment =supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        val mapFragment:SupportMapFragment=supportFragmentManager.map as SupportMapFragment
+        //val mapFragment: SupportMapFragment =supportFragmentManager.findFragmentById(R.id.mapa) as SupportMapFragment
+
+        val mapFragment:SupportMapFragment=supportFragmentManager.findFragmentById(R.id.mapa) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
     }
