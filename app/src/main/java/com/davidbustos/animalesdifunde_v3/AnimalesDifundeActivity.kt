@@ -105,7 +105,12 @@ class AnimalesDifundeActivity : AppCompatActivity(){
         }
     }
     fun todosLosAnimales(){
+        //Cargar Recycler con LinearLayoutManager
+        //Opción 1
         recycler?.layoutManager=LinearLayoutManager(this)
+        //Cargar recycler con GridLayout
+        //Opción 2
+
 
         recycler?.adapter=
             AnimalesAdapter{ animal->

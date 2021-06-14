@@ -56,7 +56,7 @@ class InicioActivity : AppCompatActivity() {
         }
         btnGoogleLogin.setOnClickListener(){
             Log.i("Google","Botón de Google");
-            /*
+
             //Configuración
 
             val googleConf:GoogleSignInOptions =
@@ -69,7 +69,7 @@ class InicioActivity : AppCompatActivity() {
             googleClient.signOut()
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
 
-             */
+
         }
         btnFacebookLogin.setOnClickListener{
             Log.i("Facebook","Botón de Facebook");

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:text="AnimalesDifunde"
         android:textAlignment="center"
@@ -22,11 +22,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/txtFotoUsuario"
+        android:id="@+id/ivFotoUsuario"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:foreground="@drawable/ic_imagen_usuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloInicio" />
@@ -42,7 +42,7 @@
         android:textSize="14dp"
         android:hint="Nombre"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtFotoUsuario"
+        app:layout_constraintStart_toEndOf="@+id/ivFotoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/txtTituloInicio" />
 
     <EditText
@@ -56,7 +56,7 @@
         android:hint="Apellido"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toEndOf="@+id/txtFotoUsuario"
+        app:layout_constraintStart_toEndOf="@+id/ivFotoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/etNombre" />
 
     <EditText
@@ -70,7 +70,7 @@
         android:hint="Correo@"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toEndOf="@+id/txtFotoUsuario"
+        app:layout_constraintStart_toEndOf="@+id/ivFotoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/etApellido" />
 
     <EditText
@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFotoUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/ivFotoUsuario" />
 
     <EditText
         android:id="@+id/etGenero"
