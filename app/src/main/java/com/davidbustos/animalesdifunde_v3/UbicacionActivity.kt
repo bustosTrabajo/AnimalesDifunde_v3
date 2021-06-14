@@ -110,10 +110,6 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
         Toast.makeText(this, "Estás en ${miPosicion.latitude}, ${miPosicion.longitude}" , Toast.LENGTH_LONG).show()
     }
 
-    override fun onMarkerClick(p0: Marker?): Boolean {
-        TODO("Not yet implemented")
-    }
-
     override fun onMarkerDragStart(p0: Marker?) {
 
     }
@@ -125,7 +121,7 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
     override fun onMarkerDragEnd(p0: Marker?) {
         latitud= marker.position.latitude.toString()
         longitud= marker.position.longitude.toString()
-        Toast.makeText(this,"Lat: "+marker.position.latitude+"Long: "+marker.position.longitude,Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"Lat: "+latitud+"Long: "+longitud,Toast.LENGTH_LONG).show()
     }
 
     // ¿Está aceptado el permiso de ubicación de usuario ? PARTE 1
@@ -179,5 +175,9 @@ class UbicacionActivity : AppCompatActivity() , OnMapReadyCallback, GoogleMap.On
             Toast.makeText(this,"Para activar la localización debes activar los permisos",Toast.LENGTH_LONG).show()
 
         }
+    }
+
+    override fun onMarkerClick(p0: Marker?): Boolean {
+        TODO("Not yet implemented")
     }
 }

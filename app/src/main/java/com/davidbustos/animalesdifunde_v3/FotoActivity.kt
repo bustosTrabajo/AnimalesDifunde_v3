@@ -88,6 +88,10 @@ class FotoActivity : AppCompatActivity() {
              //Volver al paso anterior
              val intent=Intent(this,AnimalActivity::class.java)
              intent.putExtra("nombreAnimal",nombreAnimal)
+             intent.putExtra("tipoAnimal",tipoAnimal)
+             intent.putExtra("razaAnimal",razaAnimal)
+             intent.putExtra("latitud",latitud)
+             intent.putExtra("longitud",longitud)
              startActivity(intent)
          }
          .addOnFailureListener { e ->

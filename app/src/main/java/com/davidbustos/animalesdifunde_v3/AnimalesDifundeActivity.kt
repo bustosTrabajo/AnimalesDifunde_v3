@@ -31,6 +31,8 @@ class AnimalesDifundeActivity : AppCompatActivity(){
     //Usuario
     val usuario: String? = FirebaseAuth.getInstance().currentUser?.email
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animales_difunde)
@@ -45,6 +47,7 @@ class AnimalesDifundeActivity : AppCompatActivity(){
         navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
                 //Inflar diferentes fragments o activities relacionados con el item de menú
+                R.id.item0 -> inicio()
                 R.id.item1 -> miPerfil()
                 R.id.item2 -> misAnimales()
                 R.id.item3 -> misMensajes()
@@ -81,24 +84,24 @@ class AnimalesDifundeActivity : AppCompatActivity(){
         db.collection("animales")
             .whereEqualTo("nombre", nombreAnimal)
             .addSnapshotListener{ animales, error ->
-                if(error == null){
+                //if(error == null){
                     animales?.let{
                         val listaAnimales=it.toObjects(Animal::class.java)
                         (recycler?.adapter as AnimalesAdapter).setData(listaAnimales)
                     }
-                }
+                //}
             }
     }
     private fun buscarPorCategoria(categoria:String){
         db.collection("animales")
             .whereEqualTo("tipo", categoria)
             .addSnapshotListener{ animales, error ->
-            if(error == null){
+            //if(error == null){
                 animales?.let{
                     val listaAnimales=it.toObjects(Animal::class.java)
                     (recycler?.adapter as AnimalesAdapter).setData(listaAnimales)
                 }
-            }
+            //}
         }
     }
     fun todosLosAnimales(){
@@ -120,13 +123,13 @@ class AnimalesDifundeActivity : AppCompatActivity(){
         //Actualización del Recycler
         db.collection("animales")
             .addSnapshotListener{ animales, error ->
-                if(error == null){
+                //if(error != null){
                     animales?.let{
                         val listaAnimales=it.toObjects(Animal::class.java)
 
                         (recycler?.adapter as AnimalesAdapter).setData(listaAnimales)
                     }
-                }
+                //}
             }
     }
     private fun animalSelected(animal: Animal) {
@@ -148,6 +151,11 @@ class AnimalesDifundeActivity : AppCompatActivity(){
     }
     override fun onBackPressed(){
 
+    }
+    private fun inicio(){
+        var intent= Intent(this, AnimalesDifundeActivity::class.java)
+        intent.putExtra("usuario",usuario)
+        startActivity(intent)
     }
     private fun miPerfil() {
         var intent= Intent(this, PerfilUsuarioActivity::class.java)
@@ -182,6 +190,8 @@ class AnimalesDifundeActivity : AppCompatActivity(){
     private fun cargarDatos(){
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         var usuario=sharedPreferences.getString("usuario","no usuario")
+        Toast.makeText(applicationContext,"Nombre de Usuario: {$usuario}", Toast.LENGTH_LONG).show()
+
     }
 }
 

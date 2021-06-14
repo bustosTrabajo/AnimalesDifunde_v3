@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/verde"
-    tools:context=".InicioActivity">
+    android:background="@drawable/animalesfondo"
+    tools:context=".InicioActivity"
+
+    >
 
     <TextView
         android:id="@+id/txtTitulo"
@@ -88,6 +90,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginBottom="20dp"
         android:text="¿No tienes cuenta en AnimalesDifunde?"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnSalirAplicacion"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -99,6 +102,7 @@
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="20dp"
         android:text="Registro"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btnSalirAplicacion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2" />
@@ -110,6 +114,7 @@
         android:layout_marginBottom="5dp"
         android:text="Salir de la Aplicacion"
         android:textAlignment="center"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -170,6 +175,7 @@
         android:layout_marginEnd="60dp"
         android:layout_marginBottom="20dp"
         android:text="ENTRAR"
+        android:backgroundTint="#AFAFAF"
         app:layout_constraintBottom_toTopOf="@+id/btnRegistro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
