@@ -76,6 +76,7 @@ class AnimalActivity : AppCompatActivity(){
         nav_viewAnimal.setNavigationItemSelectedListener {
             when(it.itemId){
                 //Inflar diferentes fragments o activities relacionados con el item de menú
+                R.id.item0->inicio()
                 R.id.item1 -> miPerfil()
                 R.id.item2 -> misAnimales()
                 R.id.item3 -> misMensajes()
@@ -121,6 +122,11 @@ class AnimalActivity : AppCompatActivity(){
         val sharedPreferences: SharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         var usuario=sharedPreferences.getString("usuario","no usuario")
         Toast.makeText(applicationContext,"Nombre de Usuario: {$usuario}", Toast.LENGTH_LONG).show()
+    }
+    private fun inicio(){
+        var intent= Intent(this, AnimalesDifundeActivity::class.java)
+        intent.putExtra("usuario",usuario)
+        startActivity(intent)
     }
     private fun miPerfil() {
         var intent= Intent(this, PerfilUsuarioActivity::class.java)
